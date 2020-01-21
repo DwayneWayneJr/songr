@@ -9,6 +9,6 @@ public class SongrController {
     @GetMapping("/")
     public String helloWorld() {
 
-        return "Hello World";
+        return "hello";
     }
 }
