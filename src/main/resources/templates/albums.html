@@ -8,17 +8,19 @@
 
 <body>
 
-<h1>Albums</h1>
+<div th:replace="fragments/universal :: header"></div>
+
+<h2>Albums</h2>
 
 <article th:each="album : ${albums}">
 
-    <h3 th:text="${album.title}"></h3>
+    <h3 th:text="${album.title}">Album Title</h3>
     <img th:src="${album.img}" th:alt="${album.title}" />
-    <h4 th:text="${album.artist}"></h4>
+    <h4 th:text="${album.artist}">Album Artist</h4>
 <!--    <p th:text="${album.length} + ' seconds long'"></p>-->
 <!--    <p th:text="'Released on ' + ${album.releaseDate}"></p>-->
-    <p th:text="${album.genre}"></p>
-    <p th:text="'Contains ' + ${album.songCount} + ' songs'"></p>
+    <p th:text="${album.genre}">Genre</p>
+    <p th:text="'Contains ' + ${album.songCount} + ' songs'">Songs Count</p>
 </article>
 </body>
 
