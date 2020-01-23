@@ -52,7 +52,8 @@ AlbumRepository albumRepository;
         return new RedirectView("/albums");
     }
 
-    
-
-
+    @GetMapping("/songs")
+    public RedirectView addSongs (String title, int songLength, int trackNumber, String album) {
+        Song song = new Song(title, songLength, trackNumber, album);
+    }
 }
