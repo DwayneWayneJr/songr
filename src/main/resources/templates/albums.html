@@ -3,7 +3,9 @@
 
 <head>
 
+    <meta charset="UTF-8">
     <title> Songr | Albums</title>
+    <link rel="stylesheet" type="text/css" href="/styles/albums.css">
 </head>
 
 <body>
@@ -17,11 +19,24 @@
     <h3 th:text="${album.title}">Album Title</h3>
     <img th:src="${album.img}" th:alt="${album.title}" />
     <h4 th:text="${album.artist}">Album Artist</h4>
-<!--    <p th:text="${album.length} + ' seconds long'"></p>-->
-<!--    <p th:text="'Released on ' + ${album.releaseDate}"></p>-->
-    <p th:text="${album.genre}">Genre</p>
+    <p th:text="${album.length} + ' seconds long'"></p>
     <p th:text="'Contains ' + ${album.songCount} + ' songs'">Songs Count</p>
 </article>
+
+
+<form action="/albums" method="post">
+    <label for="title">Album Title</label>
+    <input id="title" type="text" name="title">
+    <label for="img">Album Art</label>
+    <input id="img" type="text" name="img">
+    <label for="artist">Artist Name</label>
+    <input id="artist" type="text" name="artist">
+    <label for="length">Album Length</label>
+    <input id="length" type="number" name="length">
+    <label for="songCount">Number of Songs</label>
+    <input id="songCount" type="number" name="songCount">
+    <input type="submit" value="addNewAlbum">
+</form>
 </body>
 
 <footer>
