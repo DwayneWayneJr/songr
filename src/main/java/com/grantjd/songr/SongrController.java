@@ -1,29 +1,26 @@
 package com.grantjd.songr;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.List;
 
 @Controller
 public class SongrController {
 
+@Autowired
+AlbumRepository albumRepository;
+
     @GetMapping("/")
     public String home (Model m) {
         return "index";
-    }
-
-    @GetMapping("/albums")
-    public String albums (Model m) {
-        Album[] albums = new Album[] {
-                new Album("Cadillactica", "https://upload.wikimedia.org/wikipedia/en/b/b2/Big_K.R.I.T._Cadillactica.jpg", "Big K.R.I.T.",  "Hip hop", 15),
-                new Album("4eva Is a Mighty Long Time", "https://upload.wikimedia.org/wikipedia/en/8/84/Big_K.R.I.T._4eva_Is_a_Mighty_Long_Time_disc_1.jpg", "Big K.R.I.T.", "Southern hip hop", 22),
-                new Album("K.R.I.T. Iz Here", "https://upload.wikimedia.org/wikipedia/en/a/ae/Krit_iz_here.jpeg", "Big K.R.I.T.", "Southern hip hop", 19)
-        };
-        m.addAttribute("albums", albums);
-
-        return "albums";
     }
 
     @GetMapping("/hello")
@@ -38,4 +35,24 @@ public class SongrController {
 
         return "capsLockOn";
     }
+
+    @GetMapping("/albums")
+    public String albums (Model m) {
+
+        List<Album> albums = albumRepository.findAll();
+        m.addAttribute("albums", albums);
+
+        return "albums";
+    }
+
+    @PostMapping("/albums")
+    public RedirectView addAlbums (String title, String img, String artist, int length, int songCount) {
+        Album album = new Album(title, img, artist, length, songCount);
+        albumRepository.save(album);
+        return new RedirectView("/albums");
+    }
+
+    
+
+
 }
