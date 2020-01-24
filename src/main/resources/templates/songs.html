@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title> Songr | Songs</title>
+    <link rel="stylesheet" type="text/css" href="/css/songs/base.css">
+</head>
+
+<body>
+
+<div th:replace="fragments/universal :: header"></div>
+<div th:replace="fragments/universal :: div"></div>
+
+<h2>Songs</h2>
+
+<article th:each="songs : ${songs}">
+
+    <h3 th:text="${song.title}">Song Title</h3>
+    <p th:text="${song.songLength} + ' seconds long'"></p>
+    <p th:text="'Track number ' + ${song.trackNumber}"></p>
+    <h4 th:text="${song.album}">Album</h4>
+</article>
+
+<form action="/songs" method="post">
+    <label for="title">Song Title</label>
+    <input id="title" type="text" name="title">
+    <label for="songLength">Song Length</label>
+    <input id="songLength" type="number" name="songLength">
+    <label for="trackNumber">Track Number</label>
+    <input id="trackNumber" type="number" name="trackNumber">
+    <label for="album">Album Title</label>
+    <input id="album" type="text" name="album">
+    <input type="submit" value="addNewAlbum">
+</form>
+
+</body>
+
+<footer>
+
+</footer>
+</html>

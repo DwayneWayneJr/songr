@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -9,11 +9,20 @@
 <header th:fragment="header">
 
     <h1>Welcome to Songr</h1>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/albums">Albums</a>
-    </nav>
 </header>
+
+<h1>Welcome to Songr</h1>
+
+<div class="left" th:fragment="div">
+
+    <ul class="nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/albums">Albums</a></li>
+        <li><a href="/songs">Songs</a></li>
+
+    </ul>
+
+</div>
 </body>
 
 </html>
