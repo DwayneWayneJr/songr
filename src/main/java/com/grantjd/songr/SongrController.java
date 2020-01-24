@@ -60,11 +60,25 @@ SongRepository songRepository;
         return "songs";
     }
 
-    @PostMapping("/songs")
-    public RedirectView addSongs (String title, int songLength, int trackNumber, String album) {
+//    @PostMapping("/songs")
+//    public RedirectView addSongs (String title, int songLength, int trackNumber, String album) {
+//        Song song = new Song(title, songLength, trackNumber, album);
+//        songRepository.save(song);
+//        return new RedirectView("/songs");
+//    }
+
+    @GetMapping("/albums/{id}")
+    public String albums(@PathVariable long id, Model m) {
+        Album album = albumRepository.getOne(id);
+        m.addAttribute("album", album);
+        return "album-details";
+    }
+
+    @PostMapping("/albums/{id}")
+    public RedirectView addSongs (@PathVariable long id, Model m, String title, int songLength, int trackNumber) {
+        Album album = albumRepository.getOne(id);
         Song song = new Song(title, songLength, trackNumber, album);
         songRepository.save(song);
-        return new RedirectView("/songs");
-
+        return new RedirectView("/albums/" + id);
     }
 }
