@@ -18,6 +18,9 @@ public class SongrController {
 @Autowired
 AlbumRepository albumRepository;
 
+@Autowired
+SongRepository songRepository;
+
     @GetMapping("/")
     public String home (Model m) {
         return "index";
@@ -38,10 +41,8 @@ AlbumRepository albumRepository;
 
     @GetMapping("/albums")
     public String albums (Model m) {
-
         List<Album> albums = albumRepository.findAll();
         m.addAttribute("albums", albums);
-
         return "albums";
     }
 
@@ -53,7 +54,17 @@ AlbumRepository albumRepository;
     }
 
     @GetMapping("/songs")
+    public String songs (Model m) {
+        List<Song> songs = songRepository.findAll();
+        m.addAttribute("songs", songs);
+        return "songs";
+    }
+
+    @PostMapping("/songs")
     public RedirectView addSongs (String title, int songLength, int trackNumber, String album) {
         Song song = new Song(title, songLength, trackNumber, album);
+        songRepository.save(song);
+        return new RedirectView("/songs");
+
     }
 }
