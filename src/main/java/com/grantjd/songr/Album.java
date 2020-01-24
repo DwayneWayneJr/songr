@@ -1,23 +1,28 @@
 package com.grantjd.songr;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 public class Album {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Long id;
+    private long id;
     private String title;
     private String img;
     private String artist;
     private int length;
 
-    public Long getId() {
+    @OneToMany
+    private List<Song> songs;
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public long getId() {
         return id;
     }
 
@@ -50,6 +55,7 @@ public class Album {
         this.artist = artist;
         this.length = length;
         this.songCount = songCount;
+        this.songs = new LinkedList<>();
     }
 
     public Album(){}

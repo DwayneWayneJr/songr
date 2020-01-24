@@ -1,20 +1,19 @@
 package com.grantjd.songr;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Song {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    private long id;
     private String title;
     private int songLength;
     private int trackNumber;
-    private String album;
+
+    @ManyToOne
+    private Album album;
 
     public String getTitle() {
         return title;
@@ -28,11 +27,7 @@ public class Song {
         return trackNumber;
     }
 
-    public String getAlbum() {
-        return album;
-    }
-
-    public Song(String title, int songLength, int trackNumber, String album) {
+    public Song(String title, int songLength, int trackNumber, Album album) {
         this.title = title;
         this.songLength = songLength;
         this.trackNumber = trackNumber;
